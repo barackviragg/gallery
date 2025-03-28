@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Minimal Gallery</title>
+    <title>My Photography Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -36,6 +36,13 @@
             letter-spacing: 2px;
             margin-bottom: 0.5rem;
             color: #f5f5f5;
+            text-transform: uppercase;
+        }
+
+        .header-subtitle {
+            font-size: 1.1rem;
+            color: #888;
+            letter-spacing: 1px;
         }
 
         .gallery {
@@ -69,14 +76,18 @@
             .gallery {
                 grid-template-columns: 1fr;
             }
+            
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Monochrome Gallery</h1>
-            <p>Minimalist Image Collection</p>
+            <h1>My Visual Journey</h1>
+            <p class="header-subtitle">Captured Moments in Time</p>
         </header>
 
         <div class="gallery" id="gallery"></div>
@@ -85,7 +96,7 @@
     <script>
         const gallery = document.getElementById('gallery');
         
-        // Update this array with your image filenames
+        // Update this array with your actual image filenames
         const imageFiles = [
             'image1.jpg',
             'image2.jpg',
@@ -96,26 +107,37 @@
             'image7.jpg'
         ];
 
-        // GitHub Pages URL structure
-        const repoBaseUrl = window.location.hostname.includes('github.io') 
-            ? window.location.pathname.split('/').slice(0, 3).join('/') + '/images/'
-            : '/images/';
+        // Smart URL detection for GitHub Pages
+        const isGitHubHosted = window.location.hostname.includes('github.io');
+        const repoName = window.location.pathname.split('/')[1];
+        const basePath = isGitHubHosted ? `/${repoName}/images/` : '/images/';
 
-        function initGallery() {
-            imageFiles.forEach(filename => {
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item';
-                
-                const img = document.createElement('img');
-                img.src = repoBaseUrl + filename;
-                img.alt = filename;
-                
-                galleryItem.appendChild(img);
-                gallery.appendChild(galleryItem);
-            });
+        function createGalleryItem(filename) {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            
+            const img = new Image();
+            img.src = basePath + filename;
+            img.alt = `Photograph titled ${filename.split('.')[0]}`;
+            img.loading = 'lazy';
+            
+            img.onerror = () => {
+                console.warn(`Image not found: ${filename}`);
+                galleryItem.remove();
+            };
+
+            galleryItem.appendChild(img);
+            return galleryItem;
         }
 
-        // Initialize gallery when page loads
+        function initGallery() {
+            const fragment = document.createDocumentFragment();
+            imageFiles.forEach(filename => {
+                fragment.appendChild(createGalleryItem(filename));
+            });
+            gallery.appendChild(fragment);
+        }
+
         document.addEventListener('DOMContentLoaded', initGallery);
     </script>
 </body>
