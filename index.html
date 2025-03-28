@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Photography Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -29,6 +30,7 @@
             margin-bottom: 3rem;
             border-bottom: 1px solid #303030;
             padding-bottom: 1.5rem;
+            position: relative;
         }
 
         h1 {
@@ -43,6 +45,25 @@
             font-size: 1.1rem;
             color: #888;
             letter-spacing: 1px;
+        }
+
+        .social-links {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .social-link {
+            color: #888;
+            font-size: 1.4rem;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            color: #e0e0e0;
         }
 
         .gallery {
@@ -134,12 +155,31 @@
                 max-width: 95%;
                 max-height: 80%;
             }
+
+            .social-links {
+                position: static;
+                justify-content: center;
+                margin-top: 1.5rem;
+            }
+            
+            header {
+                padding-bottom: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
+            <div class="social-links">
+                <a href="https://www.instagram.com/dozsaviktor/" class="social-link" target="_blank" rel="noopener">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@adozsaviktor" class="social-link" target="_blank" rel="noopener">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+
             <h1>My Visual Work</h1>
             <p class="header-subtitle">Photography Portfolio</p>
         </header>
