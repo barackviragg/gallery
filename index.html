@@ -94,7 +94,6 @@
             display: block;
         }
 
-        /* Lightbox Styles */
         .lightbox {
             display: none;
             position: fixed;
@@ -146,11 +145,11 @@
             .gallery {
                 grid-template-columns: 1fr;
             }
-            
+
             h1 {
                 font-size: 2rem;
             }
-            
+
             .lightbox-img {
                 max-width: 95%;
                 max-height: 80%;
@@ -161,7 +160,7 @@
                 justify-content: center;
                 margin-top: 1.5rem;
             }
-            
+
             header {
                 padding-bottom: 1rem;
             }
@@ -196,53 +195,61 @@
 
     <script>
         const gallery = document.getElementById('gallery');
-        
-        // Update with your image filenames
-        const imageFiles = [
-    'image10.jpg',
-    'image9.jpg',
-    'image8.jpg',
-    'image7.jpg',
-    'image6.jpg',
-    'image5.jpg',
-    'image4.jpg',
-    'image3.jpg',
-    'image2.jpg',
-    'image1.jpg'
-];
 
+        const images = [
+            { filename: 'image22.jpg', title: 'Autumn Walk' },
+            { filename: 'image21.jpg', title: 'Sunset Over Hills' },
+            { filename: 'image20.jpg', title: 'City Reflections' },
+            { filename: 'image19.jpg', title: 'Golden Hour' },
+            { filename: 'image18.jpg', title: 'Foggy Forest' },
+            { filename: 'image17.jpg', title: 'Urban Geometry' },
+            { filename: 'image16.jpg', title: 'Still Waters' },
+            { filename: 'image15.jpg', title: 'Mountain Peaks' },
+            { filename: 'image14.jpg', title: 'Evening Lights' },
+            { filename: 'image13.jpg', title: 'Street Portrait' },
+            { filename: 'image12.jpg', title: 'Desert Dunes' },
+            { filename: 'image11.jpg', title: 'Rustic Cabin' },
+            { filename: 'image10.jpg', title: 'Ocean Breeze' },
+            { filename: 'image9.jpg', title: 'Night Drive' },
+            { filename: 'image8.jpg', title: 'Winter Calm' },
+            { filename: 'image7.jpg', title: 'Lakeside View' },
+            { filename: 'image6.jpg', title: 'Rainy Window' },
+            { filename: 'image5.jpg', title: 'Colorful Alley' },
+            { filename: 'image4.jpg', title: 'Snowy Path' },
+            { filename: 'image3.jpg', title: 'Vintage Car' },
+            { filename: 'image2.jpg', title: 'Neon Vibes' },
+            { filename: 'image1.jpg', title: 'Morning Mist' }
+        ];
 
-        // GitHub Pages URL detection
         const isGitHubHosted = window.location.hostname.includes('github.io');
         const repoName = window.location.pathname.split('/')[1];
         const basePath = isGitHubHosted ? `/${repoName}/images/` : '/images/';
 
-        function createGalleryItem(filename) {
+        function createGalleryItem(image) {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
-            
+
             const img = new Image();
-            img.src = basePath + filename;
-            img.alt = filename.split('.')[0].replace(/_/g, ' ');
+            img.src = basePath + image.filename;
+            img.alt = image.title;
             img.loading = 'lazy';
-            
-            img.addEventListener('click', () => openLightbox(img.src, filename));
+
+            img.addEventListener('click', () => openLightbox(img.src, image.title));
             img.onerror = () => galleryItem.remove();
 
             galleryItem.appendChild(img);
             return galleryItem;
         }
 
-        // Lightbox functionality
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const caption = document.getElementById('caption');
         const closeBtn = document.querySelector('.close-btn');
 
-        function openLightbox(src, filename) {
+        function openLightbox(src, title) {
             lightbox.classList.add('active');
             lightboxImg.src = src;
-            caption.textContent = filename.split('.')[0].replace(/_/g, ' ');
+            caption.textContent = title;
             document.body.style.overflow = 'hidden';
         }
 
@@ -251,15 +258,13 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Event listeners
         closeBtn.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => e.target === lightbox && closeLightbox());
         document.addEventListener('keydown', (e) => e.key === 'Escape' && closeLightbox());
 
-        // Initialize gallery
         document.addEventListener('DOMContentLoaded', () => {
             const fragment = document.createDocumentFragment();
-            imageFiles.forEach(filename => fragment.appendChild(createGalleryItem(filename)));
+            images.forEach(image => fragment.appendChild(createGalleryItem(image)));
             gallery.appendChild(fragment);
         });
     </script>
