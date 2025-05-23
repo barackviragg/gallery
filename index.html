@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>My Photography Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <style>
+        /* your existing styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', sans-serif;
         }
-
         body {
             background-color: #0a0a0a;
             color: #e0e0e0;
             min-height: 100vh;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
-
         header {
             text-align: center;
             margin-bottom: 3rem;
@@ -32,7 +33,6 @@
             padding-bottom: 1.5rem;
             position: relative;
         }
-
         h1 {
             font-size: 2.5rem;
             letter-spacing: 2px;
@@ -40,13 +40,11 @@
             color: #f5f5f5;
             text-transform: uppercase;
         }
-
         .header-subtitle {
             font-size: 1.1rem;
             color: #888;
             letter-spacing: 1px;
         }
-
         .social-links {
             position: absolute;
             top: 2rem;
@@ -54,25 +52,21 @@
             display: flex;
             gap: 1.2rem;
         }
-
         .social-link {
             color: #888;
             font-size: 1.4rem;
             transition: color 0.3s ease;
             text-decoration: none;
         }
-
         .social-link:hover {
             color: #e0e0e0;
         }
-
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
             padding: 1rem;
         }
-
         .gallery-item {
             position: relative;
             overflow: hidden;
@@ -82,18 +76,15 @@
             aspect-ratio: 1;
             cursor: pointer;
         }
-
         .gallery-item:hover {
             transform: translateY(-5px);
         }
-
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
-
         .lightbox {
             display: none;
             position: fixed;
@@ -106,18 +97,15 @@
             justify-content: center;
             align-items: center;
         }
-
         .lightbox.active {
             display: flex;
         }
-
         .lightbox-img {
             max-width: 90%;
             max-height: 90%;
             object-fit: contain;
             border-radius: 4px;
         }
-
         .close-btn {
             position: absolute;
             top: 2rem;
@@ -127,11 +115,9 @@
             cursor: pointer;
             transition: opacity 0.3s;
         }
-
         .close-btn:hover {
             opacity: 0.8;
         }
-
         .caption {
             position: absolute;
             bottom: 2rem;
@@ -140,27 +126,22 @@
             width: 100%;
             padding: 0 1rem;
         }
-
         @media (max-width: 768px) {
             .gallery {
                 grid-template-columns: 1fr;
             }
-
             h1 {
                 font-size: 2rem;
             }
-
             .lightbox-img {
                 max-width: 95%;
                 max-height: 80%;
             }
-
             .social-links {
                 position: static;
                 justify-content: center;
                 margin-top: 1.5rem;
             }
-
             header {
                 padding-bottom: 1rem;
             }
@@ -171,11 +152,21 @@
     <div class="container">
         <header>
             <div class="social-links">
-                <a href="https://www.instagram.com/dozsaviktor/" class="social-link" target="_blank" rel="noopener">
-                    <i class="fab fa-instagram"></i>
+                <a
+                  href="https://www.instagram.com/dozsaviktor/"
+                  class="social-link"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://www.tiktok.com/@adozsaviktor" class="social-link" target="_blank" rel="noopener">
-                    <i class="fab fa-tiktok"></i>
+                <a
+                  href="https://www.tiktok.com/@adozsaviktor"
+                  class="social-link"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <i class="fab fa-tiktok"></i>
                 </a>
             </div>
 
@@ -189,7 +180,7 @@
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
         <span class="close-btn">&times;</span>
-        <img class="lightbox-img" id="lightbox-img">
+        <img class="lightbox-img" id="lightbox-img" />
         <div class="caption" id="caption"></div>
     </div>
 
@@ -197,6 +188,11 @@
         const gallery = document.getElementById('gallery');
 
         const images = [
+            { filename: 'image27.jpg', title: 'Coastal Skies' },
+            { filename: 'image26.jpg', title: 'Forest Trail' },
+            { filename: 'image25.jpg', title: 'Twilight Horizon' },
+            { filename: 'image24.jpg', title: 'Countryside Calm' },
+            { filename: 'image23.jpg', title: 'Urban Reflection' },
             { filename: 'madar2.png', title: 'Bird in Flight' },
             { filename: 'image22.jpg', title: 'Autumn Walk' },
             { filename: 'image21.jpg', title: 'Sunset Over Hills' },
@@ -265,7 +261,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const fragment = document.createDocumentFragment();
-            images.forEach(image => fragment.appendChild(createGalleryItem(image)));
+            images.forEach((image) => fragment.appendChild(createGalleryItem(image)));
             gallery.appendChild(fragment);
         });
     </script>
